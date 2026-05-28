@@ -8,6 +8,9 @@ const JWT_SECRET = process.env.JWT_SECRET || "segredo"
 export const criar = async (req, res) => {
     const { nome, email, senha, bio, cidade, foto_url, privado } = req.body
 
+    if (!nome || !email || !senha)
+        return res.status(400).json({ mensagem: "Nome, email e senha são obrigatórios" })
+
     const emailExistente = await Usuario.findOne({ email })
     if (emailExistente) return res.status(409).json({ mensagem: "Email já cadastrado" })
 
@@ -20,6 +23,9 @@ export const criar = async (req, res) => {
 
 export const login = async (req, res) => {
     const { email, senha } = req.body
+
+    if (!email || !senha)
+        return res.status(400).json({ mensagem: "Email e senha são obrigatórios" })
 
     const usuario = await Usuario.findOne({ email })
     if (!usuario) return res.status(401).json({ mensagem: "Credenciais inválidas" })
