@@ -9,7 +9,7 @@ import resenhasRouter from "./rotas/resenhas.js";
 import listasRouter from "./rotas/listas.js";
 import livroListasRouter from "./rotas/livroListas.js";
 import usuarioSeguidoresRouter from "./rotas/usuarioSeguidores.js";
-
+import atividadesRouter from "./rotas/atividades.js";
 
 
 const app = express()
@@ -24,6 +24,6 @@ app.use("/resenhas", resenhasRouter);
 app.use("/listas", listasRouter);
 app.use("/livro-listas", livroListasRouter);
 app.use("/usuarios-seguidores", usuarioSeguidoresRouter);
-
+app.use("/atividades", atividadesRouter);
 
 app.listen(3000, () => console.log("Servidor rodando na porta 3000"))
