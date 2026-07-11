@@ -1,6 +1,7 @@
 
 
 import Livro from "../models/livro.js";
+import { tratarErroMongoose } from "../utils/tratarErroMongoose.js";
 
 export const criarLivro = async (req, res) => {
     try {
@@ -9,9 +10,7 @@ export const criarLivro = async (req, res) => {
         res.status(201).json(livro);
 
     } catch (erro) {
-        res.status(500).json({
-            erro: erro.message
-        });
+        tratarErroMongoose(erro, res, "Erro ao criar livro");
     }
 };
 
@@ -24,9 +23,7 @@ export const listarLivros = async (req, res) => {
         res.status(200).json(livros);
 
     } catch (erro) {
-        res.status(500).json({
-            erro: erro.message
-        });
+        tratarErroMongoose(erro, res, "Erro ao listar livros");
     }
 };
 
@@ -45,9 +42,7 @@ export const buscarLivroPorId = async (req, res) => {
         res.status(200).json(livro);
 
     } catch (erro) {
-        res.status(500).json({
-            erro: erro.message
-        });
+        tratarErroMongoose(erro, res, "Erro ao buscar livro");
     }
 };
 
@@ -59,15 +54,19 @@ export const atualizarLivro = async (req, res) => {
         const livro = await Livro.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { new: true }
+            { new: true, runValidators: true }
         );
+
+        if (!livro) {
+            return res.status(404).json({
+                mensagem: "Livro não encontrado"
+            });
+        }
 
         res.status(200).json(livro);
 
     } catch (erro) {
-        res.status(500).json({
-            erro: erro.message
-        });
+        tratarErroMongoose(erro, res, "Erro ao atualizar livro");
     }
 };
 
@@ -76,16 +75,19 @@ export const atualizarLivro = async (req, res) => {
 export const excluirLivro = async (req, res) => {
     try {
 
-        await Livro.findByIdAndDelete(req.params.id);
+        const livro = await Livro.findByIdAndDelete(req.params.id);
+
+        if (!livro) {
+            return res.status(404).json({
+                mensagem: "Livro não encontrado"
+            });
+        }
 
         res.status(200).json({
             mensagem: "Livro removido com sucesso"
         });
 
     } catch (erro) {
-        res.status(500).json({
-            erro: erro.message
-        });
+        tratarErroMongoose(erro, res, "Erro ao excluir livro");
     }
 };
-

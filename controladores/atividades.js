@@ -1,4 +1,5 @@
 import Atividade from "../models/atividade.js";
+import { tratarErroMongoose } from "../utils/tratarErroMongoose.js";
 
 // Criar uma nova atividade
 export const criarAtividade = async (req, res) => {
@@ -9,11 +10,7 @@ export const criarAtividade = async (req, res) => {
         res.status(201).json(atividade);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao criar atividade");
     }
 };
 
@@ -27,11 +24,7 @@ export const listarAtividades = async (req, res) => {
         res.status(200).json(atividades);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao listar atividades");
     }
 };
 
@@ -51,11 +44,7 @@ export const buscarAtividadePorId = async (req, res) => {
         res.status(200).json(atividade);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao buscar atividade");
     }
 };
 
@@ -66,17 +55,19 @@ export const atualizarAtividade = async (req, res) => {
         const atividade = await Atividade.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { new: true }
+            { new: true, runValidators: true }
         );
+
+        if (!atividade) {
+            return res.status(404).json({
+                mensagem: "Atividade não encontrada"
+            });
+        }
 
         res.status(200).json(atividade);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao atualizar atividade");
     }
 };
 
@@ -84,17 +75,19 @@ export const atualizarAtividade = async (req, res) => {
 export const excluirAtividade = async (req, res) => {
     try {
 
-        await Atividade.findByIdAndDelete(req.params.id);
+        const atividade = await Atividade.findByIdAndDelete(req.params.id);
+
+        if (!atividade) {
+            return res.status(404).json({
+                mensagem: "Atividade não encontrada"
+            });
+        }
 
         res.status(200).json({
             mensagem: "Atividade removida com sucesso"
         });
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao excluir atividade");
     }
 };

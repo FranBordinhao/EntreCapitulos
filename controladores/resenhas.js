@@ -1,4 +1,5 @@
 import Resenha from "../models/resenha.js";
+import { tratarErroMongoose } from "../utils/tratarErroMongoose.js";
 
 //criar resenha
 export const criarResenha = async (req, res) => {
@@ -9,11 +10,7 @@ export const criarResenha = async (req, res) => {
         res.status(201).json(resenha);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao criar resenha");
     }
 };
 
@@ -28,11 +25,7 @@ export const listarResenhas = async (req, res) => {
         res.status(200).json(resenhas);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao listar resenhas");
     }
 };
 
@@ -53,11 +46,7 @@ export const buscarResenhaPorId = async (req, res) => {
         res.status(200).json(resenha);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao buscar resenha");
     }
 };
 
@@ -68,17 +57,19 @@ export const atualizarResenha = async (req, res) => {
         const resenha = await Resenha.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { new: true }
+            { new: true, runValidators: true }
         );
+
+        if (!resenha) {
+            return res.status(404).json({
+                mensagem: "Resenha não encontrada"
+            });
+        }
 
         res.status(200).json(resenha);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao atualizar resenha");
     }
 };
 
@@ -86,17 +77,19 @@ export const atualizarResenha = async (req, res) => {
 export const excluirResenha = async (req, res) => {
     try {
 
-        await Resenha.findByIdAndDelete(req.params.id);
+        const resenha = await Resenha.findByIdAndDelete(req.params.id);
+
+        if (!resenha) {
+            return res.status(404).json({
+                mensagem: "Resenha não encontrada"
+            });
+        }
 
         res.status(200).json({
             mensagem: "Resenha removida com sucesso"
         });
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao excluir resenha");
     }
 };

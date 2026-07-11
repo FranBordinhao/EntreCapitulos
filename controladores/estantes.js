@@ -1,4 +1,5 @@
 import Estante from "../models/estante.js";
+import { tratarErroMongoose } from "../utils/tratarErroMongoose.js";
 
 export const criarEstante = async (req, res) => {
     try {
@@ -8,11 +9,7 @@ export const criarEstante = async (req, res) => {
         res.status(201).json(estante);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao criar estante");
     }
 };
 
@@ -27,11 +24,7 @@ export const listarEstantes = async (req, res) => {
         res.status(200).json(estantes);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao listar estantes");
     }
 };
 
@@ -52,11 +45,7 @@ export const buscarEstantePorId = async (req, res) => {
         res.status(200).json(estante);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao buscar estante");
     }
 };
 
@@ -67,17 +56,19 @@ export const atualizarEstante = async (req, res) => {
         const estante = await Estante.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { new: true }
+            { new: true, runValidators: true }
         );
+
+        if (!estante) {
+            return res.status(404).json({
+                mensagem: "Registro não encontrado"
+            });
+        }
 
         res.status(200).json(estante);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao atualizar estante");
     }
 };
 
@@ -85,17 +76,19 @@ export const atualizarEstante = async (req, res) => {
 export const excluirEstante = async (req, res) => {
     try {
 
-        await Estante.findByIdAndDelete(req.params.id);
+        const estante = await Estante.findByIdAndDelete(req.params.id);
+
+        if (!estante) {
+            return res.status(404).json({
+                mensagem: "Registro não encontrado"
+            });
+        }
 
         res.status(200).json({
             mensagem: "Registro removido com sucesso"
         });
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao excluir estante");
     }
 };

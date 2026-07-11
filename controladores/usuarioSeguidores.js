@@ -1,4 +1,5 @@
 import UsuarioSeguidor from "../models/usuarioSeguidor.js";
+import { tratarErroMongoose } from "../utils/tratarErroMongoose.js";
 
 // Criar um novo seguidor
 export const criarUsuarioSeguidor = async (req, res) => {
@@ -9,11 +10,7 @@ export const criarUsuarioSeguidor = async (req, res) => {
         res.status(201).json(registro);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao criar registro");
     }
 };
 
@@ -28,11 +25,7 @@ export const listarUsuarioSeguidores = async (req, res) => {
         res.status(200).json(registros);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao listar registros");
     }
 };
 
@@ -53,11 +46,7 @@ export const buscarUsuarioSeguidorPorId = async (req, res) => {
         res.status(200).json(registro);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao buscar registro");
     }
 };
 
@@ -68,17 +57,19 @@ export const atualizarUsuarioSeguidor = async (req, res) => {
         const registro = await UsuarioSeguidor.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { new: true }
+            { new: true, runValidators: true }
         );
+
+        if (!registro) {
+            return res.status(404).json({
+                mensagem: "Registro não encontrado"
+            });
+        }
 
         res.status(200).json(registro);
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao atualizar registro");
     }
 };
 
@@ -86,18 +77,19 @@ export const atualizarUsuarioSeguidor = async (req, res) => {
 export const excluirUsuarioSeguidor = async (req, res) => {
     try {
 
-        await UsuarioSeguidor.findByIdAndDelete(req.params.id);
+        const registro = await UsuarioSeguidor.findByIdAndDelete(req.params.id);
+
+        if (!registro) {
+            return res.status(404).json({
+                mensagem: "Registro não encontrado"
+            });
+        }
 
         res.status(200).json({
             mensagem: "Registro removido com sucesso"
         });
 
     } catch (erro) {
-
-        res.status(500).json({
-            erro: erro.message
-        });
-
+        tratarErroMongoose(erro, res, "Erro ao excluir registro");
     }
 };
-
