@@ -7,13 +7,14 @@ import {
     atualizarLivroLista,
     excluirLivroLista
 } from "../controladores/livroListas.js";
+import verificarToken from "../middleware/verificarToken.js";
 
 const router = express.Router();
 
-router.post("/", criarLivroLista);
+router.post("/", verificarToken, criarLivroLista);
 router.get("/", listarLivroListas);
 router.get("/:id", buscarLivroListaPorId);
-router.put("/:id", atualizarLivroLista);
-router.delete("/:id", excluirLivroLista);
+router.put("/:id", verificarToken, atualizarLivroLista);
+router.delete("/:id", verificarToken, excluirLivroLista);
 
 export default router;

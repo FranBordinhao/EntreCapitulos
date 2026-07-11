@@ -7,13 +7,14 @@ import {
     atualizarUsuarioSeguidor,
     excluirUsuarioSeguidor
 } from "../controladores/usuarioSeguidores.js";
+import verificarToken from "../middleware/verificarToken.js";
 
 const router = express.Router();
 
-router.post("/", criarUsuarioSeguidor);
+router.post("/", verificarToken, criarUsuarioSeguidor);
 router.get("/", listarUsuarioSeguidores);
 router.get("/:id", buscarUsuarioSeguidorPorId);
-router.put("/:id", atualizarUsuarioSeguidor);
-router.delete("/:id", excluirUsuarioSeguidor);
+router.put("/:id", verificarToken, atualizarUsuarioSeguidor);
+router.delete("/:id", verificarToken, excluirUsuarioSeguidor);
 
 export default router;

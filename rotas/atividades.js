@@ -7,13 +7,14 @@ import {
     atualizarAtividade,
     excluirAtividade
 } from "../controladores/atividades.js";
+import verificarToken from "../middleware/verificarToken.js";
 
 const router = express.Router();
 
-router.post("/", criarAtividade);
+router.post("/", verificarToken, criarAtividade);
 router.get("/", listarAtividades);
 router.get("/:id", buscarAtividadePorId);
-router.put("/:id", atualizarAtividade);
-router.delete("/:id", excluirAtividade);
+router.put("/:id", verificarToken, atualizarAtividade);
+router.delete("/:id", verificarToken, excluirAtividade);
 
 export default router;
