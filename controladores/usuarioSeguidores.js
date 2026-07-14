@@ -54,17 +54,25 @@ export const buscarUsuarioSeguidorPorId = async (req, res) => {
 export const atualizarUsuarioSeguidor = async (req, res) => {
     try {
 
+        const registroExistente = await UsuarioSeguidor.findById(req.params.id);
+
+        if (!registroExistente) {
+            return res.status(404).json({
+                mensagem: "Registro não encontrado"
+            });
+        }
+
+        if (registroExistente.seguidor_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para editar este registro"
+            });
+        }
+
         const registro = await UsuarioSeguidor.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true, runValidators: true }
         );
-
-        if (!registro) {
-            return res.status(404).json({
-                mensagem: "Registro não encontrado"
-            });
-        }
 
         res.status(200).json(registro);
 
@@ -77,13 +85,21 @@ export const atualizarUsuarioSeguidor = async (req, res) => {
 export const excluirUsuarioSeguidor = async (req, res) => {
     try {
 
-        const registro = await UsuarioSeguidor.findByIdAndDelete(req.params.id);
+        const registro = await UsuarioSeguidor.findById(req.params.id);
 
         if (!registro) {
             return res.status(404).json({
                 mensagem: "Registro não encontrado"
             });
         }
+
+        if (registro.seguidor_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para excluir este registro"
+            });
+        }
+
+        await registro.deleteOne();
 
         res.status(200).json({
             mensagem: "Registro removido com sucesso"

@@ -52,17 +52,25 @@ export const buscarAtividadePorId = async (req, res) => {
 export const atualizarAtividade = async (req, res) => {
     try {
 
+        const atividadeExistente = await Atividade.findById(req.params.id);
+
+        if (!atividadeExistente) {
+            return res.status(404).json({
+                mensagem: "Atividade não encontrada"
+            });
+        }
+
+        if (atividadeExistente.usuario_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para editar esta atividade"
+            });
+        }
+
         const atividade = await Atividade.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true, runValidators: true }
         );
-
-        if (!atividade) {
-            return res.status(404).json({
-                mensagem: "Atividade não encontrada"
-            });
-        }
 
         res.status(200).json(atividade);
 
@@ -75,13 +83,21 @@ export const atualizarAtividade = async (req, res) => {
 export const excluirAtividade = async (req, res) => {
     try {
 
-        const atividade = await Atividade.findByIdAndDelete(req.params.id);
+        const atividade = await Atividade.findById(req.params.id);
 
         if (!atividade) {
             return res.status(404).json({
                 mensagem: "Atividade não encontrada"
             });
         }
+
+        if (atividade.usuario_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para excluir esta atividade"
+            });
+        }
+
+        await atividade.deleteOne();
 
         res.status(200).json({
             mensagem: "Atividade removida com sucesso"

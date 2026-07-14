@@ -54,17 +54,25 @@ export const buscarResenhaPorId = async (req, res) => {
 export const atualizarResenha = async (req, res) => {
     try {
 
+        const resenhaExistente = await Resenha.findById(req.params.id);
+
+        if (!resenhaExistente) {
+            return res.status(404).json({
+                mensagem: "Resenha não encontrada"
+            });
+        }
+
+        if (resenhaExistente.usuario_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para editar esta resenha"
+            });
+        }
+
         const resenha = await Resenha.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true, runValidators: true }
         );
-
-        if (!resenha) {
-            return res.status(404).json({
-                mensagem: "Resenha não encontrada"
-            });
-        }
 
         res.status(200).json(resenha);
 
@@ -77,13 +85,21 @@ export const atualizarResenha = async (req, res) => {
 export const excluirResenha = async (req, res) => {
     try {
 
-        const resenha = await Resenha.findByIdAndDelete(req.params.id);
+        const resenha = await Resenha.findById(req.params.id);
 
         if (!resenha) {
             return res.status(404).json({
                 mensagem: "Resenha não encontrada"
             });
         }
+
+        if (resenha.usuario_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para excluir esta resenha"
+            });
+        }
+
+        await resenha.deleteOne();
 
         res.status(200).json({
             mensagem: "Resenha removida com sucesso"

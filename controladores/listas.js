@@ -47,17 +47,25 @@ export const buscarListaPorId = async (req, res) => {
 export const atualizarLista = async (req, res) => {
     try {
 
+        const listaExistente = await Lista.findById(req.params.id);
+
+        if (!listaExistente) {
+            return res.status(404).json({
+                mensagem: "Lista não encontrada"
+            });
+        }
+
+        if (listaExistente.usuario_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para editar esta lista"
+            });
+        }
+
         const lista = await Lista.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true, runValidators: true }
         );
-
-        if (!lista) {
-            return res.status(404).json({
-                mensagem: "Lista não encontrada"
-            });
-        }
 
         res.status(200).json(lista);
 
@@ -70,13 +78,21 @@ export const atualizarLista = async (req, res) => {
 export const excluirLista = async (req, res) => {
     try {
 
-        const lista = await Lista.findByIdAndDelete(req.params.id);
+        const lista = await Lista.findById(req.params.id);
 
         if (!lista) {
             return res.status(404).json({
                 mensagem: "Lista não encontrada"
             });
         }
+
+        if (lista.usuario_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para excluir esta lista"
+            });
+        }
+
+        await lista.deleteOne();
 
         res.status(200).json({
             mensagem: "Lista removida com sucesso"

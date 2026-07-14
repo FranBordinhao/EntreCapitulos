@@ -53,17 +53,25 @@ export const buscarEstantePorId = async (req, res) => {
 export const atualizarEstante = async (req, res) => {
     try {
 
+        const estanteExistente = await Estante.findById(req.params.id);
+
+        if (!estanteExistente) {
+            return res.status(404).json({
+                mensagem: "Registro não encontrado"
+            });
+        }
+
+        if (estanteExistente.usuario_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para editar este registro"
+            });
+        }
+
         const estante = await Estante.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true, runValidators: true }
         );
-
-        if (!estante) {
-            return res.status(404).json({
-                mensagem: "Registro não encontrado"
-            });
-        }
 
         res.status(200).json(estante);
 
@@ -76,13 +84,21 @@ export const atualizarEstante = async (req, res) => {
 export const excluirEstante = async (req, res) => {
     try {
 
-        const estante = await Estante.findByIdAndDelete(req.params.id);
+        const estante = await Estante.findById(req.params.id);
 
         if (!estante) {
             return res.status(404).json({
                 mensagem: "Registro não encontrado"
             });
         }
+
+        if (estante.usuario_id.toString() !== req.usuario.id) {
+            return res.status(403).json({
+                mensagem: "Sem permissão para excluir este registro"
+            });
+        }
+
+        await estante.deleteOne();
 
         res.status(200).json({
             mensagem: "Registro removido com sucesso"
