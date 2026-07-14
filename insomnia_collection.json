@@ -1,0 +1,1283 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-07-14T02:14:44.219Z",
+  "__export_source": "insomnia.desktop.app:v9.3.2",
+  "resources": [
+    {
+      "_id": "wrk_00000001",
+      "parentId": null,
+      "modified": 1783985285219,
+      "created": 1783985286219,
+      "name": "EntreCapitulos API",
+      "description": "Coleção de requisições da API REST do EntreCapitulos (rede social de leitores).",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_00000002",
+      "parentId": "wrk_00000001",
+      "modified": 1783985287219,
+      "created": 1783985288219,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "token": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "token"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": -1783995280219,
+      "_type": "environment"
+    },
+    {
+      "_id": "fld_00000003",
+      "parentId": "wrk_00000001",
+      "modified": 1783985289219,
+      "created": 1783985290219,
+      "name": "Usuários",
+      "description": "Cadastro, login e gerenciamento de usuários.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1783995278219,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_00000004",
+      "parentId": "fld_00000003",
+      "modified": 1783985291219,
+      "created": 1783985292219,
+      "url": "{{ base_url }}/usuarios",
+      "name": "Criar usuário",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Fulano de Tal\",\n  \"email\": \"fulano@teste.com\",\n  \"senha\": \"123456\",\n  \"bio\": \"Amante de ficção científica\",\n  \"cidade\": \"Porto Alegre\",\n  \"foto_url\": \"\",\n  \"privado\": false\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1783995276219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000005",
+      "parentId": "fld_00000003",
+      "modified": 1783985293219,
+      "created": 1783985294219,
+      "url": "{{ base_url }}/usuarios/login",
+      "name": "Login",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"fulano@teste.com\",\n  \"senha\": \"123456\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1783995274219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000006",
+      "parentId": "fld_00000003",
+      "modified": 1783985295219,
+      "created": 1783985296219,
+      "url": "{{ base_url }}/usuarios/{USUARIO_ID}",
+      "name": "Buscar usuário por ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995272219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000007",
+      "parentId": "fld_00000003",
+      "modified": 1783985297219,
+      "created": 1783985298219,
+      "url": "{{ base_url }}/usuarios/{USUARIO_ID}",
+      "name": "Atualizar usuário",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"bio\": \"Nova bio\",\n  \"cidade\": \"Curitiba\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995270219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000008",
+      "parentId": "fld_00000003",
+      "modified": 1783985299219,
+      "created": 1783985300219,
+      "url": "{{ base_url }}/usuarios/{USUARIO_ID}",
+      "name": "Excluir usuário",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995268219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_00000009",
+      "parentId": "wrk_00000001",
+      "modified": 1783985301219,
+      "created": 1783985302219,
+      "name": "Livros",
+      "description": "Cadastro do catálogo de livros.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1783995266219,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_0000000a",
+      "parentId": "fld_00000009",
+      "modified": 1783985303219,
+      "created": 1783985304219,
+      "url": "{{ base_url }}/livros",
+      "name": "Criar livro",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"titulo\": \"Duna\",\n  \"autores\": [\n    \"Frank Herbert\"\n  ],\n  \"isbn\": \"9788576572778\",\n  \"editora\": \"Aleph\",\n  \"ano\": 1965,\n  \"paginas\": 620,\n  \"capa_url\": \"\",\n  \"sinopse\": \"Em um futuro distante, o jovem Paul Atreides...\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995264219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000b",
+      "parentId": "fld_00000009",
+      "modified": 1783985305219,
+      "created": 1783985306219,
+      "url": "{{ base_url }}/livros",
+      "name": "Listar livros",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995262219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000c",
+      "parentId": "fld_00000009",
+      "modified": 1783985307219,
+      "created": 1783985308219,
+      "url": "{{ base_url }}/livros/{LIVRO_ID}",
+      "name": "Buscar livro por ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995260219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000d",
+      "parentId": "fld_00000009",
+      "modified": 1783985309219,
+      "created": 1783985310219,
+      "url": "{{ base_url }}/livros/{LIVRO_ID}",
+      "name": "Atualizar livro",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sinopse\": \"Sinopse atualizada.\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995258219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000e",
+      "parentId": "fld_00000009",
+      "modified": 1783985311219,
+      "created": 1783985312219,
+      "url": "{{ base_url }}/livros/{LIVRO_ID}",
+      "name": "Excluir livro",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995256219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_0000000f",
+      "parentId": "wrk_00000001",
+      "modified": 1783985313219,
+      "created": 1783985314219,
+      "name": "Estantes",
+      "description": "Estante de leitura pessoal de cada usuário.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1783995254219,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_0000000g",
+      "parentId": "fld_0000000f",
+      "modified": 1783985315219,
+      "created": 1783985316219,
+      "url": "{{ base_url }}/estantes",
+      "name": "Criar estante",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuario_id\": \"{USUARIO_ID}\",\n  \"livro_id\": \"{LIVRO_ID}\",\n  \"status\": \"lendo\",\n  \"progresso\": 30\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995252219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000h",
+      "parentId": "fld_0000000f",
+      "modified": 1783985317219,
+      "created": 1783985318219,
+      "url": "{{ base_url }}/estantes",
+      "name": "Listar estantes",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995250219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000i",
+      "parentId": "fld_0000000f",
+      "modified": 1783985319219,
+      "created": 1783985320219,
+      "url": "{{ base_url }}/estantes/{ESTANTE_ID}",
+      "name": "Buscar estante por ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995248219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000j",
+      "parentId": "fld_0000000f",
+      "modified": 1783985321219,
+      "created": 1783985322219,
+      "url": "{{ base_url }}/estantes/{ESTANTE_ID}",
+      "name": "Atualizar estante",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"lido\",\n  \"progresso\": 100\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995246219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000k",
+      "parentId": "fld_0000000f",
+      "modified": 1783985323219,
+      "created": 1783985324219,
+      "url": "{{ base_url }}/estantes/{ESTANTE_ID}",
+      "name": "Excluir estante",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995244219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_0000000l",
+      "parentId": "wrk_00000001",
+      "modified": 1783985325219,
+      "created": 1783985326219,
+      "name": "Resenhas",
+      "description": "Resenhas de livros escritas pelos usuários.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1783995242219,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_0000000m",
+      "parentId": "fld_0000000l",
+      "modified": 1783985327219,
+      "created": 1783985328219,
+      "url": "{{ base_url }}/resenhas",
+      "name": "Criar resenha",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuario_id\": \"{USUARIO_ID}\",\n  \"livro_id\": \"{LIVRO_ID}\",\n  \"nota\": 5,\n  \"texto\": \"Um dos melhores livros de ficção científica que já li.\",\n  \"spoiler\": false\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995240219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000n",
+      "parentId": "fld_0000000l",
+      "modified": 1783985329219,
+      "created": 1783985330219,
+      "url": "{{ base_url }}/resenhas",
+      "name": "Listar resenhas",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995238219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000o",
+      "parentId": "fld_0000000l",
+      "modified": 1783985331219,
+      "created": 1783985332219,
+      "url": "{{ base_url }}/resenhas/{RESENHA_ID}",
+      "name": "Buscar resenha por ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995236219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000p",
+      "parentId": "fld_0000000l",
+      "modified": 1783985333219,
+      "created": 1783985334219,
+      "url": "{{ base_url }}/resenhas/{RESENHA_ID}",
+      "name": "Atualizar resenha",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nota\": 4,\n  \"texto\": \"Texto revisado da resenha.\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995234219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000q",
+      "parentId": "fld_0000000l",
+      "modified": 1783985335219,
+      "created": 1783985336219,
+      "url": "{{ base_url }}/resenhas/{RESENHA_ID}",
+      "name": "Excluir resenha",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995232219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_0000000r",
+      "parentId": "wrk_00000001",
+      "modified": 1783985337219,
+      "created": 1783985338219,
+      "name": "Listas",
+      "description": "Listas personalizadas de livros.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1783995230219,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_0000000s",
+      "parentId": "fld_0000000r",
+      "modified": 1783985339219,
+      "created": 1783985340219,
+      "url": "{{ base_url }}/listas",
+      "name": "Criar lista",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuario_id\": \"{USUARIO_ID}\",\n  \"nome\": \"Ficção científica essencial\",\n  \"descricao\": \"Livros que todo fã de FC deveria ler\",\n  \"publica\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995228219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000t",
+      "parentId": "fld_0000000r",
+      "modified": 1783985341219,
+      "created": 1783985342219,
+      "url": "{{ base_url }}/listas",
+      "name": "Listar listas",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995226219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000u",
+      "parentId": "fld_0000000r",
+      "modified": 1783985343219,
+      "created": 1783985344219,
+      "url": "{{ base_url }}/listas/{LISTA_ID}",
+      "name": "Buscar lista por ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995224219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000v",
+      "parentId": "fld_0000000r",
+      "modified": 1783985345219,
+      "created": 1783985346219,
+      "url": "{{ base_url }}/listas/{LISTA_ID}",
+      "name": "Atualizar lista",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Ficção científica essencial (atualizado)\",\n  \"publica\": false\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995222219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000w",
+      "parentId": "fld_0000000r",
+      "modified": 1783985347219,
+      "created": 1783985348219,
+      "url": "{{ base_url }}/listas/{LISTA_ID}",
+      "name": "Excluir lista",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995220219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_0000000x",
+      "parentId": "wrk_00000001",
+      "modified": 1783985349219,
+      "created": 1783985350219,
+      "name": "Livro-Listas",
+      "description": "Associação entre livros e listas.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1783995218219,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_0000000y",
+      "parentId": "fld_0000000x",
+      "modified": 1783985351219,
+      "created": 1783985352219,
+      "url": "{{ base_url }}/livro-listas",
+      "name": "Adicionar livro a uma lista",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"lista_id\": \"{LISTA_ID}\",\n  \"livro_id\": \"{LIVRO_ID}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995216219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000000z",
+      "parentId": "fld_0000000x",
+      "modified": 1783985353219,
+      "created": 1783985354219,
+      "url": "{{ base_url }}/livro-listas",
+      "name": "Listar livro-listas",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995214219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000010",
+      "parentId": "fld_0000000x",
+      "modified": 1783985355219,
+      "created": 1783985356219,
+      "url": "{{ base_url }}/livro-listas/{LIVRO_LISTA_ID}",
+      "name": "Buscar livro-lista por ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995212219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000011",
+      "parentId": "fld_0000000x",
+      "modified": 1783985357219,
+      "created": 1783985358219,
+      "url": "{{ base_url }}/livro-listas/{LIVRO_LISTA_ID}",
+      "name": "Atualizar livro-lista",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"livro_id\": \"{OUTRO_LIVRO_ID}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995210219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000012",
+      "parentId": "fld_0000000x",
+      "modified": 1783985359219,
+      "created": 1783985360219,
+      "url": "{{ base_url }}/livro-listas/{LIVRO_LISTA_ID}",
+      "name": "Remover livro da lista",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995208219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_00000013",
+      "parentId": "wrk_00000001",
+      "modified": 1783985361219,
+      "created": 1783985362219,
+      "name": "Usuário-Seguidores",
+      "description": "Relações de seguir entre usuários.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1783995206219,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_00000014",
+      "parentId": "fld_00000013",
+      "modified": 1783985363219,
+      "created": 1783985364219,
+      "url": "{{ base_url }}/usuarios-seguidores",
+      "name": "Seguir usuário",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"seguidor_id\": \"{USUARIO_ID}\",\n  \"seguido_id\": \"{OUTRO_USUARIO_ID}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995204219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000015",
+      "parentId": "fld_00000013",
+      "modified": 1783985365219,
+      "created": 1783985366219,
+      "url": "{{ base_url }}/usuarios-seguidores",
+      "name": "Listar seguidores",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995202219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000016",
+      "parentId": "fld_00000013",
+      "modified": 1783985367219,
+      "created": 1783985368219,
+      "url": "{{ base_url }}/usuarios-seguidores/{RELACAO_ID}",
+      "name": "Buscar relação por ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995200219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000017",
+      "parentId": "fld_00000013",
+      "modified": 1783985369219,
+      "created": 1783985370219,
+      "url": "{{ base_url }}/usuarios-seguidores/{RELACAO_ID}",
+      "name": "Atualizar relação de seguidor",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"seguido_id\": \"{OUTRO_USUARIO_ID}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995198219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_00000018",
+      "parentId": "fld_00000013",
+      "modified": 1783985371219,
+      "created": 1783985372219,
+      "url": "{{ base_url }}/usuarios-seguidores/{RELACAO_ID}",
+      "name": "Deixar de seguir",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995196219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_00000019",
+      "parentId": "wrk_00000001",
+      "modified": 1783985373219,
+      "created": 1783985374219,
+      "name": "Atividades",
+      "description": "Feed de atividades dos usuários.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1783995194219,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_0000001a",
+      "parentId": "fld_00000019",
+      "modified": 1783985375219,
+      "created": 1783985376219,
+      "url": "{{ base_url }}/atividades",
+      "name": "Criar atividade",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuario_id\": \"{USUARIO_ID}\",\n  \"tipo\": \"resenha\",\n  \"descricao\": \"Fulano escreveu uma resenha para Duna\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995192219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000001b",
+      "parentId": "fld_00000019",
+      "modified": 1783985377219,
+      "created": 1783985378219,
+      "url": "{{ base_url }}/atividades",
+      "name": "Listar atividades",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995190219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000001c",
+      "parentId": "fld_00000019",
+      "modified": 1783985379219,
+      "created": 1783985380219,
+      "url": "{{ base_url }}/atividades/{ATIVIDADE_ID}",
+      "name": "Buscar atividade por ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1783995188219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000001d",
+      "parentId": "fld_00000019",
+      "modified": 1783985381219,
+      "created": 1783985382219,
+      "url": "{{ base_url }}/atividades/{ATIVIDADE_ID}",
+      "name": "Atualizar atividade",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"descricao\": \"Descrição atualizada da atividade\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995186219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0000001e",
+      "parentId": "fld_00000019",
+      "modified": 1783985383219,
+      "created": 1783985384219,
+      "url": "{{ base_url }}/atividades/{ATIVIDADE_ID}",
+      "name": "Excluir atividade",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ token }}",
+        "prefix": ""
+      },
+      "metaSortKey": -1783995184219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+PROPOSTA DA APLICAÇÃO - ENTRECAPITULOS
+
+O EntreCapitulos é uma API REST para uma rede social voltada a leitores, que
+centraliza o controle de leitura e a interação entre usuários em um único
+sistema. Cada usuário pode cadastrar os livros que conhece, organizar sua
+própria estante de leitura, escrever resenhas, montar listas personalizadas
+e seguir outros leitores para acompanhar sua atividade.
+
+PRINCIPAIS FUNCIONALIDADES
+
+- Cadastro e autenticação de usuários, com senha protegida por hash (bcrypt)
+  e login via token JWT.
+- Cadastro de livros (título, autores, ISBN, editora, ano, sinopse, capa).
+- Estante de leitura pessoal, permitindo marcar livros como "quero ler",
+  "lendo", "lido" ou "abandonado", com acompanhamento de progresso e datas
+  de início/conclusão.
+- Resenhas de livros, com nota, texto e marcação de spoiler.
+- Listas personalizadas de livros (públicas ou privadas), com a possibilidade
+  de adicionar e remover livros de cada lista.
+- Sistema de seguidores, permitindo que um usuário siga outros leitores.
+- Feed de atividades, registrando ações como início/fim de leitura, novas
+  resenhas, criação de listas e novos seguidores.
+
+A leitura dos dados (livros, resenhas, listas, estantes, etc.) é pública,
+permitindo que qualquer pessoa explore o conteúdo da plataforma. Já a
+criação, edição e exclusão de registros exigem autenticação via token JWT,
+e cada usuário só pode alterar ou remover os recursos dos quais é o dono
+(sua própria estante, suas próprias resenhas, listas e relações de
+seguidor), garantindo autorização adequada além da simples autenticação.
